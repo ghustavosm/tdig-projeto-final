@@ -10,7 +10,7 @@ setLocale(utils.YupSetLocale());
 
 const schema = Yup.object().shape({
   nome: Yup.string().required(),
-  idade: Yup.number().required().positive().integer().min(17, "Você deve ter mais que 16 anos"),
+  idade: Yup.number().transform(value => isNaN(value) ? 0 : value).required().integer().min(17, "Você deve ter mais que 16 anos"),
   cpf: Yup.string().required().matches(/^\d{3}\.\d{3}\.\d{3}\-\d{2}$/, 'O CPF deve estar no formato 000.000.000-00'),
   matricula: Yup.string().required().min(9),
   curso: Yup.string().required(),
