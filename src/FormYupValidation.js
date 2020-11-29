@@ -46,6 +46,7 @@ const FormYupValidation = () => {
           isSubmitting,
         }) => (
         <form onSubmit={handleSubmit}>
+          <legend>Cadastro de Aluno</legend>
           <label>
             Nome completo*:
             <Field type="text" name="nome"
@@ -159,7 +160,7 @@ const FormYupValidation = () => {
                    onChange={handleChange}/>
           </label>
           <ErrorMessage name="cep" className="error" component="span" />
-          <input type="submit" value="Login" disabled={isSubmitting}/>
+          <input type="submit" value="Cadastrar" disabled={isSubmitting}/>
         </form>
       )}
     </Formik>
