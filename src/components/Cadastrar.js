@@ -1,72 +1,74 @@
 /* eslint-disable no-useless-escape */
 import React from 'react';
-import firebase from 'firebase/app';
-import 'firebase/firestore';
+import firebaseDB from '../firebase';
 import { Formik, ErrorMessage, Field } from 'formik';
 import * as Yup from 'yup';
 import { setLocale } from 'yup';
-import * as utils from "./utils";
-import './App.css';
+import * as utils from "../utils";
+import '../App.css';
 
 /*
- * Inicialização do Firebase
- */
-if(!firebase.apps.length) {
-  firebase.initializeApp(utils.firebaseConfig());
-}
-
-//console.log(firebase.app().name);
-let defaultFirestore = firebase.firestore();
-
-/*
- * Validação com Yup
- */
-setLocale(utils.YupSetLocale());
-
-const schema = Yup.object().shape({
-  nome: Yup.string().required(),
-  idade: Yup.number().transform(value => isNaN(value) ? 0 : value).required().integer().min(17, 'Você deve ter mais que 16 anos'),
-  cpf: Yup.string().required().matches(/^\d{3}\.\d{3}\.\d{3}\-\d{2}$/, 'O CPF deve estar no formato 000.000.000-00'),
-  matricula: Yup.string().required().min(9),
-  curso: Yup.string().required(),
-  endereco: Yup.string().required(),
-  bairro: Yup.string().required(),
-  cidade: Yup.string().required(),
-  estado: Yup.string().required(),
-  cep: Yup.string().required().matches(/^\d{5}\-\d{3}$/, 'O CEP deve estar no formato 00000-000')
-});
-
-/*
- * Submissão do formulário
- */
-const handleSubmitting = (values, { setSubmitting, setStatus }) => {
-  setStatus({isValidating: true});
-  setTimeout(() => {
-    //.delete()
-    //.set()
-    defaultFirestore.collection('alunos').doc('q6d6LES2NqEtsyQhVNRA').set(values).then(() => {
-      console.info('OK!');
-      //console.info(JSON.stringify(values, null, 2));
-    }).catch((e) => {
-      console.info('ERRO!');
-      console.info(e);
-    });
-
-    setSubmitting(false);
-    setStatus({isValidating: false})
-  }, 400);
-}
-
-/*
- * Formulário
+ * Página
  */
 const Cadastrar = () => {
+
+  let alunos = firebaseDB.collection('alunos');
+
+  /*
+   * Validação com Yup
+   */
+  setLocale(utils.YupSetLocale());
+  
+  const schema = Yup.object().shape({
+    nome: Yup.string().required(),
+    idade: Yup.number().transform(value => isNaN(value) ? 0 : value).required().integer().min(17, 'Você deve ter mais que 16 anos'),
+    cpf: Yup.string().required().matches(/^\d{3}\.\d{3}\.\d{3}\-\d{2}$/, 'O CPF deve estar no formato 000.000.000-00'),
+    matricula: Yup.string().required().min(9),
+    curso: Yup.string().required(),
+    endereco: Yup.string().required(),
+    bairro: Yup.string().required(),
+    cidade: Yup.string().required(),
+    estado: Yup.string().required(),
+    cep: Yup.string().required().matches(/^\d{5}\-\d{3}$/, 'O CEP deve estar no formato 00000-000')
+  });
+  
+  const onSubmitError = (error, setSubmitting, setErrors, setStatus) => {
+    alert(error.message);
+    console.info(error);
+    setStatus({success: false});
+    setSubmitting(false);
+    setErrors({submit: error.message});
+  }
+  
+  /*
+   * Submissão do formulário
+   */
+  const onSubmit = (values, {setSubmitting, setErrors, setStatus, resetForm}) => {
+    setTimeout(() => {
+      alunos.where('cpf', '==', values.cpf).get().then((snapshot) => {
+        if(snapshot.size >= 1) {
+          throw new Error('Erro ao cadastrar! Já existe um aluno cadastrado com esse CPF.');
+        } else {
+          alunos.add(values).then(() => {
+            alert('Aluno cadastrado com sucesso!');
+            resetForm({})
+            setStatus({success: true})
+          }).catch((error) => {
+            onSubmitError(error, setSubmitting, setErrors, setStatus);
+          });
+        }
+      }).catch((error) => {
+        onSubmitError(error, setSubmitting, setErrors, setStatus);
+      });
+    }, 400);
+  }
+
   return (
     <Formik
       validationSchema={schema}
       initialStatus={{isValidating: false}}
       initialValues={{ nome: '', idade: '', cpf: '', matricula: '', curso: '', endereco: '', numero: '', complemento: '', bairro: '', cidade: '', estado: '', cep: ''}}
-      onSubmit={handleSubmitting}
+      onSubmit={onSubmit}
     >
       {({
           handleChange,

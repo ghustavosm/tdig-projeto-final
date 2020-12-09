@@ -1,8 +1,8 @@
 import React from "react";
-import Navbar from "./Navbar";
-import Home from "./Home";
-import Cadastrar from "./Cadastrar";
-import Sobre from "./Sobre";
+import Navbar from "./components/Navbar";
+import Home from "./components/Home";
+import Cadastrar from "./components/Cadastrar";
+import Sobre from "./components/Sobre";
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import "./App.css";
 
