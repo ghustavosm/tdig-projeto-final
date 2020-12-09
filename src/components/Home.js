@@ -22,7 +22,7 @@ const Home = () => {
     <div className="Home">
         <h1>Home</h1>
         <hr />
-        <p>This is our home.</p>
+        <h3>Alunos cadastrados:</h3>
         <table className="table table-borderless table-stripped">
           <thead className="thead-light">
               <tr>
@@ -30,12 +30,13 @@ const Home = () => {
                   <th>Idade</th>
                   <th>CPF</th>
                   <th>Matricula</th>
+                  <th>Curso</th>
                   <th>Endereço</th>
-                  <th>Número</th>
-                  <th>Complemento</th>
+                  <th>Nº</th>
+                  <th>Comp.</th>
                   <th>Bairro</th>
                   <th>Cidade</th>
-                  <th>Estado</th>
+                  <th>UF</th>
                   <th>CEP</th>
               </tr>
           </thead>
@@ -53,6 +54,7 @@ const Home = () => {
                           <td>{alunos[key].complemento}</td>
                           <td>{alunos[key].bairro}</td>
                           <td>{alunos[key].cidade}</td>
+                          <td>{alunos[key].estado}</td>
                           <td>{alunos[key].cep}</td>
                       </tr>
                   ))
