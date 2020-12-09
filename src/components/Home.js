@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import firebaseDB from '../firebase';
-import '../App.css';
 
 /*
  * Página

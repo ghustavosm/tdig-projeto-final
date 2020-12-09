@@ -4,8 +4,7 @@ import firebaseDB from '../firebase';
 import { Formik, ErrorMessage, Field } from 'formik';
 import * as Yup from 'yup';
 import { setLocale } from 'yup';
-import * as utils from "../utils";
-import '../App.css';
+import yupLocale from "../yup";
 
 /*
  * Página
@@ -17,7 +16,7 @@ const Cadastrar = () => {
   /*
    * Validação com Yup
    */
-  setLocale(utils.YupSetLocale());
+  setLocale(yupLocale);
   
   const schema = Yup.object().shape({
     nome: Yup.string().required(),
