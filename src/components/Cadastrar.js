@@ -2,9 +2,7 @@
 import React from 'react';
 import firebaseDB from '../firebase';
 import { Formik, ErrorMessage, Field } from 'formik';
-import * as Yup from 'yup';
-import { setLocale } from 'yup';
-import yupLocale from "../yup";
+import Yup from "../yup";
 
 /*
  * Página
@@ -15,9 +13,7 @@ const Cadastrar = () => {
 
   /*
    * Validação com Yup
-   */
-  setLocale(yupLocale);
-  
+   */  
   const schema = Yup.object().shape({
     nome: Yup.string().required(),
     idade: Yup.number().transform(value => isNaN(value) ? 0 : value).required().integer().min(17, 'Você deve ter mais que 16 anos'),

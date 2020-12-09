@@ -1,4 +1,6 @@
 /* eslint-disable no-template-curly-in-string */
+import * as Yup from 'yup';
+import { setLocale } from 'yup';
 
 const yupLocale = {
     mixed: {
@@ -37,4 +39,6 @@ const yupLocale = {
     },
 };
 
-export default yupLocale;
+setLocale(yupLocale);
+
+export default Yup;
