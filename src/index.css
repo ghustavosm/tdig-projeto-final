@@ -1,180 +1,24 @@
-html,
-body {
-	margin: 0;
-	padding: 0;
+a,
+a:hover {
+  color: #333;
 }
 
-body {
-  background-color: #f7f7f7;
-	font-family: 'Open Sans', sans-serif;
-	color: #333;
-	overflow-y: scroll;
-	font-size: 14px;
+section.main {
+  margin-top: 30px;
 }
 
-a {
-	color: #333;
-	text-decoration: none;
+table .fa-pencil {
+  margin-right: 10px;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+table .acoes {
+  text-align: center;
 }
 
-.App, .Home, .Sobre {
-  margin: 50px auto;
-  max-width: 1200px;
+table .acoes a:hover {
+  color: rgba(0,0,0,.5);
 }
 
-.App-link {
-  color: #09d3ac;
-}
-
-.Navbar {
-	width: 100%;
-	height: 72px;
-  background: #212530;
-}
-
-.conteudo-navbar {
-	width: 1200px;
-	margin: 0 auto;
-	color: #fff;
-}
-
-.Navbar ul {
-  padding: 0;
-  margin: 0;
-	max-width: 600px;
-}
-
-.Navbar ul li {
-	float: left;
-	list-style: none;
-}
-
-.Navbar ul li a {
-	display: block;
-	padding: 0 20px;
-	line-height: 72px;
-	font-weight: 600;
-	color: #fff;
-}
-
-.Navbar ul li a:hover {
-	background: #fff;
-	color: #333;
-}
-
-.error {
-  color: red;
-}
-
-body{
-  background: white;
-}
-
-form {
-  font-family: sans-serif;
-  margin: 30px auto;
-  width: 600px;
-  background: rgba(0,0,0,.1);
-  padding: 40px 100px;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  border-radius: 10px;
-}
-
-legend {
-  margin: 10px auto 30px;
-  font-size: 28px;
-  font-weight: 700;
-  text-transform: uppercase;
-}
-
-label{
-  letter-spacing: 1px;
-  text-transform: uppercase;
-  font-size: 14px;
-  color: black;
-}
-
-input[type=text], input[type=password], input[type=email], select {
-  display: inline-block;
-  border: none;
-  text-align: left;
-  padding: 10px;
-  width: 350px;
-  margin: 10px 0;
-  margin-left: 10px;
-  color: black;
-}
-
-select {
-  width: 370px;
-}
-
-input[type=text]:focus{
-  background: none;
-  border: none;
-  color: black;
-}
-
-input[type=submit]{
-  cursor: pointer;
-  background: transparent;
-  color: black;
-  font-family: sans-serif;
-  text-transform: uppercase;
-  letter-spacing: 3px;
-  margin: 20px 0;
-  padding: 10px 30px;
-  border: 2px solid black;
-}
-
-input[type=submit]:hover{
-  background: #222;
-  color: #fff;
-}
-
-table {
-  border: 1px solid #dddddd;
-  width: 100%;
-  text-align: left;
-  border-collapse: collapse;
-}
-table td, table th {
-  border: 0px solid #000000;
-  padding: 15px 15px;
-}
-table tbody td {
-  font-size: 13px;
-}
-table tr:nth-child(even) {
-  background: #EEEEEE;
-}
-table thead {
-  background: #DCDCDC;
-}
-table thead th {
-  font-size: 15px;
-  font-weight: bold;
-  color: #000000;
-  text-align: left;
-  border-left: 0px solid #D0E4F5;
-}
-table thead th:first-child {
-  border-left: none;
-}
-
-table tfoot {
-  font-size: 14px;
-  font-weight: bold;
-  color: #000000;
-  background: #DCDCDC;
-}
-table tfoot td {
-  font-size: 14px;
+.remover-confirmar .btn-primary {
+  margin-right: 10px;
 }

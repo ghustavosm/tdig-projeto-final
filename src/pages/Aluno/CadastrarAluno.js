@@ -1,15 +1,20 @@
 /* eslint-disable no-useless-escape */
 import React from 'react';
-import firebaseDB from '../firebase';
+import firebaseDB from '../../services/Firebase';
 import { Formik, ErrorMessage, Field } from 'formik';
-import Yup from "../yup";
+import Yup from "../../helpers/Yup";
+import { useRouteMatch } from 'react-router-dom'
 
 /*
  * Página
  */
 const Cadastrar = () => {
 
-  let alunos = firebaseDB.collection('alunos');
+  const { tipo } = useRouteMatch().params;
+
+  console.log(tipo);
+
+  let alunos = firebaseDB.firestore().collection('alunos');
 
   /*
    * Validação com Yup

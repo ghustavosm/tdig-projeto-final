@@ -1,15 +1,16 @@
 import React, { useState, useEffect } from 'react';
-import firebaseDB from '../firebase';
+import firebaseDB from '../../services/Firebase';
+import { Link } from 'react-router-dom';
 
 /*
  * Página
  */
-const Home = () => {
+const ListarAlunos = () => {
 
   var [alunos, setAlunos] = useState({})
 
   useEffect(() => {
-    firebaseDB.collection('alunos').get().then((snapshot) => {
+    firebaseDB.firestore().collection('alunos').get().then((snapshot) => {
       let alunos = {};
       snapshot.forEach(function(doc) {
         alunos[doc.id] = doc.data();
@@ -19,25 +20,25 @@ const Home = () => {
   }, []);
 
   return (
-    <div className="Home">
-        <h1>Home</h1>
+    <div className="listar-alunos">
+        <h1>Listagem de alunos cadastrados:</h1>
         <hr />
-        <h3>Alunos cadastrados:</h3>
-        <table className="table table-borderless table-stripped">
-          <thead className="thead-light">
+        <table className="table table-striped">
+          <thead className="thead-dark">
               <tr>
-                  <th>Nome</th>
-                  <th>Idade</th>
-                  <th>CPF</th>
-                  <th>Matricula</th>
-                  <th>Curso</th>
-                  <th>Endereço</th>
-                  <th>Nº</th>
-                  <th>Comp.</th>
-                  <th>Bairro</th>
-                  <th>Cidade</th>
-                  <th>UF</th>
-                  <th>CEP</th>
+                  <th scope="col">Nome</th>
+                  <th scope="col">Idade</th>
+                  <th scope="col">CPF</th>
+                  <th scope="col">Matricula</th>
+                  <th scope="col">Curso</th>
+                  <th scope="col">Endereço</th>
+                  <th scope="col">Nº</th>
+                  <th scope="col">Comp.</th>
+                  <th scope="col">Bairro</th>
+                  <th scope="col">Cidade</th>
+                  <th scope="col">UF</th>
+                  <th scope="col">CEP</th>
+                  <th scope="col">Ações</th>
               </tr>
           </thead>
           <tbody>
@@ -56,6 +57,10 @@ const Home = () => {
                           <td>{alunos[key].cidade}</td>
                           <td>{alunos[key].estado}</td>
                           <td>{alunos[key].cep}</td>
+                          <td className="acoes">
+                            <Link to="/editar/aluno/id"><i className="fa fa-pencil"></i></Link>
+                            <Link to="/remover/aluno/id"><i className="fa fa-trash"></i></Link>
+                          </td>
                       </tr>
                   ))
               }
@@ -65,4 +70,4 @@ const Home = () => {
   )
 };
 
-export default Home;
+export default ListarAlunos;
