@@ -1,21 +1,19 @@
 import React from 'react';
-import { useRouteMatch } from 'react-router-dom';
+import CadastrarAluno from './CadastrarAluno';
 
 /*
  * Página
  */
-const EditarAluno = () => {
-
-    const { tipo, id } = useRouteMatch().params;
-
+const EditarAluno = ({component: Component, ...rest}) => {
     return (
-        <div className="editar-aluno">
-            <h1>Editar aluno:</h1>
-            <hr />
-            <p>{tipo}</p>
-            <p>{id}</p>
-        </div>
-    )
+        <CadastrarAluno
+            {...rest}
+            render={props => {
+                    return <Component {...props} />
+                }
+            }
+        />
+    );
 };
 
 export default EditarAluno;

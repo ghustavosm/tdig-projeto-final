@@ -1,15 +1,7 @@
 import React from 'react';
-import Navbar from './Navbar';
-import Login from '../pages/Login';
-import Logout from '../pages/Logout';
-import Home from '../pages/Home';
-import Ver from '../pages/Ver';
-import Listar from '../pages/Listar';
-import Cadastrar from '../pages/Cadastrar';
-import Editar from '../pages/Editar';
-import Remover from '../pages/Remover';
-import Sobre from '../pages/Sobre';
-import NaoEncontrada from '../pages/NaoEncontrada';
+import Header from './Header';
+import Footer from './Footer';
+import { Login, Logout, Home, Ver, Listar, Cadastrar, Editar, Remover, Sobre, NaoEncontrada } from '../pages';
 import { isAuthenticated } from './Auth';
 import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom';
 
@@ -44,7 +36,7 @@ const PrivateRoute = ({component: Component, ...rest}) => (
 const Routes = () => {
     return (    
         <Router>
-            <Navbar />
+            <Header />
             <section className="section main">
                 <div className="container">
                     <div className="row">
@@ -65,6 +57,7 @@ const Routes = () => {
                     </div>
                 </div>
             </section>
+            <Footer />
         </Router>
     );
 }

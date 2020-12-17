@@ -10,7 +10,7 @@ const ListarAlunos = () => {
   var [alunos, setAlunos] = useState({})
 
   useEffect(() => {
-    firebaseDB.firestore().collection('alunos').get().then((snapshot) => {
+    firebaseDB.firestore().collection('usuarios').orderBy('nome').get().then((snapshot) => {
       let alunos = {};
       snapshot.forEach(function(doc) {
         alunos[doc.id] = doc.data();
@@ -47,7 +47,7 @@ const ListarAlunos = () => {
                       <tr key={key}>
                           <td>{alunos[key].nome}</td>
                           <td>{alunos[key].idade}</td>
-                          <td>{alunos[key].cpf}</td>
+                          <td className="nowrap">{alunos[key].cpf}</td>
                           <td>{alunos[key].matricula}</td>
                           <td>{alunos[key].curso}</td>
                           <td>{alunos[key].endereco}</td>
@@ -56,10 +56,11 @@ const ListarAlunos = () => {
                           <td>{alunos[key].bairro}</td>
                           <td>{alunos[key].cidade}</td>
                           <td>{alunos[key].estado}</td>
-                          <td>{alunos[key].cep}</td>
-                          <td className="acoes">
-                            <Link to="/editar/aluno/id"><i className="fa fa-pencil"></i></Link>
-                            <Link to="/remover/aluno/id"><i className="fa fa-trash"></i></Link>
+                          <td className="nowrap">{alunos[key].cep}</td>
+                          <td className="acoes nowrap">
+                            <Link to={"/ver/aluno/" + key} title="Ver"><i className="fa fa-eye"></i></Link>
+                            <Link to={"/editar/aluno/" + key} title="Editar"><i className="fa fa-pencil"></i></Link>
+                            <Link to={"/remover/aluno/" + key} title="Remover"><i className="fa fa-trash"></i></Link>
                           </td>
                       </tr>
                   ))

@@ -1,7 +1,7 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import { Link } from 'react-router-dom';
 
-const Navbar = () => (
+const Header = () => (
   <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
     <div className="container">
       <a className="navbar-brand">Gerenciador de Projetos</a>
@@ -49,4 +49,4 @@ const Navbar = () => (
   </nav>
 );
 
-export default Navbar;
+export default Header;

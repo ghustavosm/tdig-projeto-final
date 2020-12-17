@@ -1,13 +1,43 @@
+body {
+  background-color: #333;
+}
+
 a,
 a:hover {
   color: #333;
 }
 
 section.main {
-  margin-top: 30px;
+  min-height: 700px;
+  padding-top: 30px;
+  padding-bottom: 50px;
+  background-color: #fff;
 }
 
-table .fa-pencil {
+.navbar.bg-dark {
+  background-color: #333 !important;
+}
+
+.navbar .navbar-brand {
+  margin-right: 30px;
+}
+
+.navbar .navbar-brand,
+.navbar .nav-link {
+  padding: 20px 0;
+}
+
+.navbar .nav-item {
+  margin-right: 15px;
+}
+
+.navbar .dropdown-item.active,
+.navbar .dropdown-item:active {
+  background-color: #333;
+}
+
+table .fa-pencil,
+table .fa-eye {
   margin-right: 10px;
 }
 
@@ -19,6 +49,57 @@ table .acoes a:hover {
   color: rgba(0,0,0,.5);
 }
 
+table .nowrap {
+  white-space: nowrap;
+}
+
 .remover-confirmar .btn-primary {
   margin-right: 10px;
+}
+
+.cadastrar-aluno {
+  margin: 0 auto;
+}
+
+.form-container {
+  margin-top: 20px;
+  padding: 30px;
+  border: 1px solid #dee2e6;
+  border-width: 1px;
+  border-radius: 8px;
+}
+
+form label {
+  margin-bottom: .5rem;
+}
+
+form .form-group {
+  margin-bottom: 15px;;
+}
+
+form .field-error {
+  border: 2px solid rgba(253, 13, 13, 0.25);
+}
+
+form .alert-warning {
+  margin-top: 10px;;
+  padding: 10px;
+}
+
+form .alert-warning.show {
+  display: block;
+}
+
+form .alert-warning.hide {
+  display: none;
+}
+
+.footer {
+  color: #fff;
+  background-color: #333;
+}
+
+.footer .container {
+  padding: 30px;
+  text-align: center;
 }
