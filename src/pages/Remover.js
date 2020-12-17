@@ -1,55 +1,51 @@
-import React, { useState } from 'react';
-import { useRouteMatch, useHistory } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { useRouteMatch } from 'react-router-dom';
+import firebaseDB from '../services/Firebase';
+import Carregando from '../components/Carregando';
+import Mensagem from '../components/Mensagem';
 
-const removerFirebase = (tipo, id) => {
-  return true;
-};
+const ResultadoRemover = () => {
+  const { tipo, id } = useRouteMatch().params;
+  const [sucesso, setSucesso] = useState(null);
 
-const RemoverSucesso = () => {
-  const history = useHistory();
-  return (
-  <div className="remover-sucesso">
-    <h1>Removido com sucesso!</h1>
-    <hr />
-    <button type="button" className="btn btn-secondary btn-lg" onClick={() => { history.goBack() }}>Retornar</button>
-  </div>
-  )
-};
+  useEffect(() => {
+    if(tipo === 'aluno' || tipo === 'professor') {
+      firebaseDB.firestore().collection('usuarios').doc(id).delete().then(function() {
+        setSucesso(true);
+      }).catch(function(error) {
+        setSucesso(false);
+        console.error("Erro ao remover cadastro!", error);
+      });
+    } else {
+      firebaseDB.firestore().collection('projetos').doc(id).delete().then(function() {
+        setSucesso(true);
+      }).catch(function(error) {
+        setSucesso(false);
+        console.error("Erro ao remover cadastro!", error);
+      });
+    }
+  }, [tipo, id]);
 
-const RemoverErro = () => {
-  const history = useHistory();
-  return (
-  <div className="remover-erro">
-    <h1>Erro ao remover!</h1>
-    <hr />
-    <button type="button" className="btn btn-secondary btn-lg" onClick={() => { history.goBack() }}>Retornar</button>
-  </div>
-  )
-};
+  if(sucesso === true) {
+    return <Mensagem titulo="Removido com sucesso!" texto="Entrada removida com seucesso do banco de dados." />;
+  } else if (sucesso === false) {
+    return <Mensagem titulo="Erro ao remover!" texto="HOuve um erro ao tentar remover a entrada do banco de dados." />;
+  } else {
+    return <Carregando />;
+  }
+
+}
 
 /*
  * Página
  */
 const Remover = () => {
-  const history = useHistory();
-  const { tipo, id } = useRouteMatch().params;
-  const [confirmado, setConfirmado] = useState(false);
+  const [confirmado, setConfirmado] = useState(false);  
 
   if(!confirmado) {
-    return (
-      <div className="remover-confirmar">
-        <h1>Tem certeza que deseja remover?</h1>
-        <hr />
-        <button type="button" className="btn btn-primary btn-lg" onClick={() => { setConfirmado(true) }}>Confirmar</button>
-        <button type="button" className="btn btn-secondary btn-lg" onClick={() => { history.goBack() }}>Cancelar</button>
-      </div>
-    )
+    return <Mensagem titulo="Confirmação necessária!" texto="Tem certeza que deseja remover este cadastro?" botaoAcao={{acao: () => { setConfirmado(true) }, nome: "Confirmar"}} />
   } else {
-      if(removerFirebase(tipo, id) === true) {
-        return <RemoverSucesso />;
-      } else {
-        return <RemoverErro />;
-      }
+    return <ResultadoRemover />
   }  
 }
 
