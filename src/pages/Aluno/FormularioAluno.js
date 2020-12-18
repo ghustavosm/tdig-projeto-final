@@ -9,7 +9,6 @@ const FormularioAluno = ({component: Component, ...rest}) => {
      */  
     const schema = Yup.object().shape({
       email: Yup.string().email().required(),
-      senha: Yup.string().required(),
       nome: Yup.string().required(),
       idade: Yup.number().transform(value => isNaN(value) ? 0 : value).required().integer().min(17, 'Você deve ter mais que 16 anos'),
       cpf: Yup.string().required().matches(/^\d{3}\.\d{3}\.\d{3}\-\d{2}$/, 'O CPF deve estar no formato 000.000.000-00'),
@@ -47,12 +46,6 @@ const FormularioAluno = ({component: Component, ...rest}) => {
                     <label htmlFor="email">Email*:</label>
                     <Field type="email" className={"form-control" + (touched.email && errors.email ? " field-error" : "")} id="email" name="email" placeholder="Email" onBlur={handleBlur} onChange={handleChange} />
                     <ErrorMessage name="email" className={"alert alert-warning" + (touched.email && errors.email ? " show" : " hide")} role="alert" component="div"/>
-                  </div>
-  
-                  <div className="form-group">
-                    <label htmlFor="senha">Senha*:</label>
-                    <Field type="password" className={"form-control" + (touched.senha && errors.senha ? " field-error" : "")} id="senha" name="senha" placeholder="Senha" onBlur={handleBlur} onChange={handleChange} />
-                    <ErrorMessage name="senha" className={"alert alert-warning" + (touched.senha && errors.senha ? " show" : " hide")} role="alert" component="div"/>
                   </div>
   
                   <div className="form-group">

@@ -10,7 +10,7 @@ import FormularioAluno from '../../pages/Aluno/FormularioAluno';
 const Cadastrar = () => {
 
   const [sucesso, setSucesso] = useState(false);  
-  const valoresIniciais = { email: '', senha: '', tipo: 'aluno', nome: '', idade: '', cpf: '', matricula: '', curso: '', endereco: '', numero: '', complemento: '', bairro: '', cidade: '', estado: '', cep: ''};
+  const valoresIniciais = { email: '', tipo: 'aluno', nome: '', idade: '', cpf: '', matricula: '', curso: '', endereco: '', numero: '', complemento: '', bairro: '', cidade: '', estado: '', cep: ''};
   
   const onSubmitError = (field, error, actions) => {
     console.info(error);

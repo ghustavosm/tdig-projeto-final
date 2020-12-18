@@ -10,7 +10,7 @@ import FormularioProfessor from '../../pages/Professor/FormularioProfessor';
 const Cadastrar = () => {
 
   const [sucesso, setSucesso] = useState(false);  
-  const valoresIniciais = { email: '', senha: '', tipo: 'professor', nome: '', matricula: '', atuacao: '', formacao: ''};
+  const valoresIniciais = { email: '', tipo: 'professor', nome: '', matricula: '', atuacao: '', formacao: ''};
   
   const onSubmitError = (field, error, actions) => {
     console.info(error);

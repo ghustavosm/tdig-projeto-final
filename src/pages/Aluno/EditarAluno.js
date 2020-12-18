@@ -13,7 +13,7 @@ const Editar = () => {
   
   const [sucesso, setSucesso] = useState(false);
   const [carregado, setCarregado] = useState(false);  
-  const [valoresIniciais, setValoresIniciais] = useState({ email: '', senha: '', tipo: 'aluno', nome: '', idade: '', cpf: '', matricula: '', curso: '', endereco: '', numero: '', complemento: '', bairro: '', cidade: '', estado: '', cep: ''});
+  const [valoresIniciais, setValoresIniciais] = useState({ email: '', tipo: 'aluno', nome: '', idade: '', cpf: '', matricula: '', curso: '', endereco: '', numero: '', complemento: '', bairro: '', cidade: '', estado: '', cep: ''});
   const { id } = useRouteMatch().params;
 
   useEffect(() => {
@@ -21,7 +21,7 @@ const Editar = () => {
     snapshot = firebaseDB.firestore().collection('usuarios').doc(id).onSnapshot((doc) => {
         let usuario = doc.data();
         usuario.id = doc.id;        
-        setValoresIniciais({ email: usuario.email, senha: usuario.senha, tipo: usuario.tipo, nome: usuario.nome, idade: usuario.idade, cpf: usuario.cpf, matricula: usuario.matricula, curso: usuario.curso, endereco: usuario.endereco, numero: usuario.numero, complemento: usuario.complemento, bairro: usuario.bairro, cidade: usuario.cidade, estado: usuario.estado, cep: usuario.cep});
+        setValoresIniciais({ email: usuario.email, tipo: usuario.tipo, nome: usuario.nome, idade: usuario.idade, cpf: usuario.cpf, matricula: usuario.matricula, curso: usuario.curso, endereco: usuario.endereco, numero: usuario.numero, complemento: usuario.complemento, bairro: usuario.bairro, cidade: usuario.cidade, estado: usuario.estado, cep: usuario.cep});
         setCarregado(true);
     });    
     return () => {

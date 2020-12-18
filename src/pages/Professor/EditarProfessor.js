@@ -13,7 +13,7 @@ const Editar = () => {
   
   const [sucesso, setSucesso] = useState(false);
   const [carregado, setCarregado] = useState(false);  
-  const [valoresIniciais, setValoresIniciais] = useState({ email: '', senha: '', tipo: 'professor', nome: '', matricula: '', atuacao: '', formacao: ''});
+  const [valoresIniciais, setValoresIniciais] = useState({ email: '', tipo: 'professor', nome: '', matricula: '', atuacao: '', formacao: ''});
   const { id } = useRouteMatch().params;
 
   useEffect(() => {
@@ -21,7 +21,7 @@ const Editar = () => {
     snapshot = firebaseDB.firestore().collection('usuarios').doc(id).onSnapshot((doc) => {
         let usuario = doc.data();
         usuario.id = doc.id;        
-        setValoresIniciais({ email: usuario.email, senha: usuario.senha, tipo: usuario.tipo, nome: usuario.nome, matricula: usuario.matricula, atuacao: usuario.atuacao, formacao: usuario.formacao});
+        setValoresIniciais({ email: usuario.email, tipo: usuario.tipo, nome: usuario.nome, matricula: usuario.matricula, atuacao: usuario.atuacao, formacao: usuario.formacao});
         setCarregado(true);
     });    
     return () => {

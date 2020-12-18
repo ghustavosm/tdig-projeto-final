@@ -9,8 +9,8 @@ import BotaoVoltar from '../../components/BotaoVoltar';
  */
 const VerProjeto = () => {
 
-  var [membros, setMembros] = useState([]);
-  var [usuarios, setUsuarios] = useState([]);
+  const [membros, setMembros] = useState([]);
+  const [usuarios, setUsuarios] = useState([]);
   const [sucesso, setSucesso] = useState(false);
   const [valoresIniciais, setValoresIniciais] = useState({ nome: '', descricao: '' });
   const { id } = useRouteMatch().params;
