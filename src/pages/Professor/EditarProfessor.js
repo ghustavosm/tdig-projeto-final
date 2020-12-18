@@ -13,7 +13,7 @@ const Editar = () => {
   
   const [sucesso, setSucesso] = useState(false);
   const [carregado, setCarregado] = useState(false);  
-  const [valoresIniciais, setValoresIniciais] = useState({ usuario: '', senha: '', tipo: 'professor', nome: '', matricula: '', atuacao: '', formacao: ''});
+  const [valoresIniciais, setValoresIniciais] = useState({ email: '', senha: '', tipo: 'professor', nome: '', matricula: '', atuacao: '', formacao: ''});
   const { id } = useRouteMatch().params;
 
   useEffect(() => {
@@ -21,7 +21,7 @@ const Editar = () => {
     snapshot = firebaseDB.firestore().collection('usuarios').doc(id).onSnapshot((doc) => {
         let usuario = doc.data();
         usuario.id = doc.id;        
-        setValoresIniciais({ usuario: usuario.usuario, senha: usuario.senha, tipo: usuario.tipo, nome: usuario.nome, matricula: usuario.matricula, atuacao: usuario.atuacao, formacao: usuario.formacao});
+        setValoresIniciais({ email: usuario.email, senha: usuario.senha, tipo: usuario.tipo, nome: usuario.nome, matricula: usuario.matricula, atuacao: usuario.atuacao, formacao: usuario.formacao});
         setCarregado(true);
     });    
     return () => {
@@ -39,13 +39,13 @@ const Editar = () => {
   const onSubmit = (values, actions) => {
     let usuariosTabela = firebaseDB.firestore().collection('usuarios');
       setTimeout(() => {
-        usuariosTabela.where('usuario', '==', values.usuario).get().then((snapshot) => {
+        usuariosTabela.where('email', '==', values.email).get().then((snapshot) => {
           let docId = '';
           snapshot.forEach(function(doc) {
             docId = doc.id;
           });
           if(snapshot.size >= 1 && id !== docId) {
-            throw new Error('Já existe um cadastro com esse nome de usuario.');
+            throw new Error('Já existe um cadastro com esse email.');
           } else {
             usuariosTabela.where('matricula', '==', values.matricula).get().then((snapshot) => {
                 let docId = '';
@@ -72,7 +72,7 @@ const Editar = () => {
           }
         }).catch((error) => {
           setSucesso(false);
-          onSubmitError('usuario', error, actions);
+          onSubmitError('email', error, actions);
         });
       }, 400);      
   }

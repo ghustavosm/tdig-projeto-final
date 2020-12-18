@@ -10,7 +10,7 @@ import FormularioAluno from '../../pages/Aluno/FormularioAluno';
 const Cadastrar = () => {
 
   const [sucesso, setSucesso] = useState(false);  
-  const valoresIniciais = { usuario: '', senha: '', tipo: 'aluno', nome: '', idade: '', cpf: '', matricula: '', curso: '', endereco: '', numero: '', complemento: '', bairro: '', cidade: '', estado: '', cep: ''};
+  const valoresIniciais = { email: '', senha: '', tipo: 'aluno', nome: '', idade: '', cpf: '', matricula: '', curso: '', endereco: '', numero: '', complemento: '', bairro: '', cidade: '', estado: '', cep: ''};
   
   const onSubmitError = (field, error, actions) => {
     console.info(error);
@@ -25,9 +25,9 @@ const Cadastrar = () => {
   const onSubmit = (values, actions) => {
     let usuariosTabela = firebaseDB.firestore().collection('usuarios');
     setTimeout(() => {
-      usuariosTabela.where('usuario', '==', values.usuario).get().then((snapshot) => {
+      usuariosTabela.where('email', '==', values.email).get().then((snapshot) => {
         if(snapshot.size >= 1) {
-          throw new Error('Já existe um cadastro com esse nome de usuario.');
+          throw new Error('Já existe um cadastro com esse email.');
         } else {
           usuariosTabela.where('cpf', '==', values.cpf).get().then((snapshot) => {
             if(snapshot.size >= 1) {
@@ -60,7 +60,7 @@ const Cadastrar = () => {
         }
       }).catch((error) => {
         setSucesso(false);
-        onSubmitError('usuario', error, actions);
+        onSubmitError('email', error, actions);
       });
     }, 400);
   }

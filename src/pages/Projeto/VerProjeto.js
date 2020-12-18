@@ -63,7 +63,7 @@ const VerProjeto = () => {
             <th scope="row">Membros do projeto</th>
             <td>{
                 Object.keys(membros).map((key) => (
-                    <div>
+                    <div key={key}>
                         {usuarios[membros[key].usuario].nome} ({membros[key].funcao})<br />
                     </div>
                 ))

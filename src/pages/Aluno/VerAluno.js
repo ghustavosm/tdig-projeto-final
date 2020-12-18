@@ -12,7 +12,7 @@ const VerAluno = () => {
     var [membros, setMembros] = useState([]);
     var [projetos, setProjetos] = useState([]);
     const [sucesso, setSucesso] = useState(false);
-    const [valoresIniciais, setValoresIniciais] = useState({ usuario: '', senha: '', tipo: 'aluno', nome: '', idade: '', cpf: '', matricula: '', curso: '', endereco: '', numero: '', complemento: '', bairro: '', cidade: '', estado: '', cep: '' });
+    const [valoresIniciais, setValoresIniciais] = useState({ email: '', senha: '', tipo: 'aluno', nome: '', idade: '', cpf: '', matricula: '', curso: '', endereco: '', numero: '', complemento: '', bairro: '', cidade: '', estado: '', cep: '' });
     const { id } = useRouteMatch().params;
 
     useEffect(() => {
@@ -32,7 +32,7 @@ const VerAluno = () => {
                 snapshot = firebaseDB.firestore().collection('usuarios').doc(id).onSnapshot((doc) => {
                     let usuario = doc.data();
                     usuario.id = doc.id;
-                    setValoresIniciais({ usuario: usuario.usuario, senha: usuario.senha, tipo: usuario.tipo, nome: usuario.nome, idade: usuario.idade, cpf: usuario.cpf, matricula: usuario.matricula, curso: usuario.curso, endereco: usuario.endereco, numero: usuario.numero, complemento: usuario.complemento, bairro: usuario.bairro, cidade: usuario.cidade, estado: usuario.estado, cep: usuario.cep });
+                    setValoresIniciais({ email: usuario.email, senha: usuario.senha, tipo: usuario.tipo, nome: usuario.nome, idade: usuario.idade, cpf: usuario.cpf, matricula: usuario.matricula, curso: usuario.curso, endereco: usuario.endereco, numero: usuario.numero, complemento: usuario.complemento, bairro: usuario.bairro, cidade: usuario.cidade, estado: usuario.estado, cep: usuario.cep });
                     setSucesso(true);
                 });
             }).catch(function (error) {
@@ -55,6 +55,10 @@ const VerAluno = () => {
                 <hr />
                 <table className="table">
                     <tbody>
+                        <tr>
+                            <th scope="row">Email</th>
+                            <td>{valoresIniciais.email}</td>
+                        </tr>
                         <tr>
                             <th scope="row">Idade</th>
                             <td>{valoresIniciais.idade}</td>
@@ -103,7 +107,7 @@ const VerAluno = () => {
                             <th scope="row">Participação em projetos</th>
                             <td>{
                                 Object.keys(membros).map((key) => (
-                                    <div>
+                                    <div key={key}>
                                         {projetos[membros[key].projeto].nome} ({membros[key].funcao})<br/>
                                     </div>
                                 ))

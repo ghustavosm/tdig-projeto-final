@@ -13,7 +13,7 @@ const Editar = () => {
   
   const [sucesso, setSucesso] = useState(false);
   const [carregado, setCarregado] = useState(false);  
-  const [valoresIniciais, setValoresIniciais] = useState({ usuario: '', senha: '', tipo: 'aluno', nome: '', idade: '', cpf: '', matricula: '', curso: '', endereco: '', numero: '', complemento: '', bairro: '', cidade: '', estado: '', cep: ''});
+  const [valoresIniciais, setValoresIniciais] = useState({ email: '', senha: '', tipo: 'aluno', nome: '', idade: '', cpf: '', matricula: '', curso: '', endereco: '', numero: '', complemento: '', bairro: '', cidade: '', estado: '', cep: ''});
   const { id } = useRouteMatch().params;
 
   useEffect(() => {
@@ -21,7 +21,7 @@ const Editar = () => {
     snapshot = firebaseDB.firestore().collection('usuarios').doc(id).onSnapshot((doc) => {
         let usuario = doc.data();
         usuario.id = doc.id;        
-        setValoresIniciais({ usuario: usuario.usuario, senha: usuario.senha, tipo: usuario.tipo, nome: usuario.nome, idade: usuario.idade, cpf: usuario.cpf, matricula: usuario.matricula, curso: usuario.curso, endereco: usuario.endereco, numero: usuario.numero, complemento: usuario.complemento, bairro: usuario.bairro, cidade: usuario.cidade, estado: usuario.estado, cep: usuario.cep});
+        setValoresIniciais({ email: usuario.email, senha: usuario.senha, tipo: usuario.tipo, nome: usuario.nome, idade: usuario.idade, cpf: usuario.cpf, matricula: usuario.matricula, curso: usuario.curso, endereco: usuario.endereco, numero: usuario.numero, complemento: usuario.complemento, bairro: usuario.bairro, cidade: usuario.cidade, estado: usuario.estado, cep: usuario.cep});
         setCarregado(true);
     });    
     return () => {
@@ -39,13 +39,13 @@ const Editar = () => {
   const onSubmit = (values, actions) => {
     let usuariosTabela = firebaseDB.firestore().collection('usuarios');
       setTimeout(() => {
-        usuariosTabela.where('usuario', '==', values.usuario).get().then((snapshot) => {
+        usuariosTabela.where('email', '==', values.email).get().then((snapshot) => {
           let docId = '';
           snapshot.forEach(function(doc) {
             docId = doc.id;
           });
           if(snapshot.size >= 1 && id !== docId) {
-            throw new Error('Já existe um cadastro com esse nome de usuario.');
+            throw new Error('Já existe um cadastro com esse email.');
           } else {
             usuariosTabela.where('cpf', '==', values.cpf).get().then((snapshot) => {
               let docId = '';
@@ -85,7 +85,7 @@ const Editar = () => {
           }
         }).catch((error) => {
           setSucesso(false);
-          onSubmitError('usuario', error, actions);
+          onSubmitError('email', error, actions);
         });
       }, 400);      
   }

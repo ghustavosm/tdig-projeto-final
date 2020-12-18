@@ -8,7 +8,7 @@ const FormularioAluno = ({component: Component, ...rest}) => {
      * Validação com Yup
      */  
     const schema = Yup.object().shape({
-      usuario: Yup.string().required(),
+      email: Yup.string().email().required(),
       senha: Yup.string().required(),
       nome: Yup.string().required(),
       idade: Yup.number().transform(value => isNaN(value) ? 0 : value).required().integer().min(17, 'Você deve ter mais que 16 anos'),
@@ -44,9 +44,9 @@ const FormularioAluno = ({component: Component, ...rest}) => {
                 <form onSubmit={handleSubmit}>
   
                   <div className="form-group">
-                    <label htmlFor="usuario">Nome de usuario*:</label>
-                    <Field type="text" className={"form-control" + (touched.usuario && errors.usuario ? " field-error" : "")} id="usuario" name="usuario" placeholder="Nome de usuário" onBlur={handleBlur} onChange={handleChange} />
-                    <ErrorMessage name="usuario" className={"alert alert-warning" + (touched.usuario && errors.usuario ? " show" : " hide")} role="alert" component="div"/>
+                    <label htmlFor="email">Email*:</label>
+                    <Field type="email" className={"form-control" + (touched.email && errors.email ? " field-error" : "")} id="email" name="email" placeholder="Email" onBlur={handleBlur} onChange={handleChange} />
+                    <ErrorMessage name="email" className={"alert alert-warning" + (touched.email && errors.email ? " show" : " hide")} role="alert" component="div"/>
                   </div>
   
                   <div className="form-group">

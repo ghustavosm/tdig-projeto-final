@@ -10,7 +10,7 @@ import FormularioProfessor from '../../pages/Professor/FormularioProfessor';
 const Cadastrar = () => {
 
   const [sucesso, setSucesso] = useState(false);  
-  const valoresIniciais = { usuario: '', senha: '', tipo: 'professor', nome: '', matricula: '', atuacao: '', formacao: ''};
+  const valoresIniciais = { email: '', senha: '', tipo: 'professor', nome: '', matricula: '', atuacao: '', formacao: ''};
   
   const onSubmitError = (field, error, actions) => {
     console.info(error);
@@ -25,9 +25,9 @@ const Cadastrar = () => {
   const onSubmit = (values, actions) => {
     let usuariosTabela = firebaseDB.firestore().collection('usuarios');
     setTimeout(() => {
-      usuariosTabela.where('usuario', '==', values.usuario).get().then((snapshot) => {
+      usuariosTabela.where('email', '==', values.email).get().then((snapshot) => {
         if(snapshot.size >= 1) {
-          throw new Error('Já existe um cadastro com esse nome de usuario.');
+          throw new Error('Já existe um cadastro com esse email.');
         } else {
             usuariosTabela.where('matricula', '==', values.matricula).get().then((snapshot) => {
             if(snapshot.size >= 1) {
@@ -51,7 +51,7 @@ const Cadastrar = () => {
         }
       }).catch((error) => {
         setSucesso(false);
-        onSubmitError('usuario', error, actions);
+        onSubmitError('email', error, actions);
       });
     }, 400);
   }
