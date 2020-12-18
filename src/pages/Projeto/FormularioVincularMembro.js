@@ -70,10 +70,9 @@ const FormularioVincularMembro = ({ component: Component, ...rest }) => {
                                 isSubmitting,
                             }) => (
                                 <form onSubmit={handleSubmit}>
-                                    { tipo !== 'projeto' ?
                                     <div className="form-group">
                                         <label htmlFor="projeto">Projeto*</label>
-                                        <Field as="select" className={"form-control" + (touched.projeto && errors.projeto ? " field-error" : "")} id="projeto" name="projeto" onBlur={handleBlur} onChange={handleChange}>
+                                        <Field as="select" className={"form-control" + (touched.projeto && errors.projeto ? " field-error" : "")} id="projeto" name="projeto" disabled={tipo === 'projeto'} onBlur={handleBlur} onChange={handleChange}>
                                             <option value="">Selecione</option>
                                             {Object.keys(projetos).map((key) => (
                                                 <option value={key}>{projetos[key].nome}</option>
@@ -81,12 +80,10 @@ const FormularioVincularMembro = ({ component: Component, ...rest }) => {
                                         </Field>
                                         <ErrorMessage name="projeto" className={"alert alert-warning" + (touched.projeto && errors.projeto ? " show" : " hide")} role="alert" component="div" />
                                     </div>
-                                    : '' }
 
-                                    { tipo !== 'membro' ?
                                     <div className="form-group">
                                         <label htmlFor="usuario">Usuário*</label>
-                                        <Field as="select" className={"form-control" + (touched.usuario && errors.usuario ? " field-error" : "")} id="usuario" name="usuario" onBlur={handleBlur} onChange={handleChange}>
+                                        <Field as="select" className={"form-control" + (touched.usuario && errors.usuario ? " field-error" : "")} id="usuario" name="usuario" disabled={tipo === 'membro'} onBlur={handleBlur} onChange={handleChange}>
                                             <option value="">Selecione</option>
                                             {Object.keys(usuarios).map((key) => (
                                                 <option value={key}>{usuarios[key].nome}</option>
@@ -94,7 +91,6 @@ const FormularioVincularMembro = ({ component: Component, ...rest }) => {
                                         </Field>
                                         <ErrorMessage name="usuario" className={"alert alert-warning" + (touched.usuario && errors.usuario ? " show" : " hide")} role="alert" component="div" />
                                     </div>
-                                    : '' }
 
                                     <div className="form-group">
                                         <label htmlFor="funcao">Função*</label>
