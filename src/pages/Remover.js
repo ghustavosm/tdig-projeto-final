@@ -16,8 +16,15 @@ const ResultadoRemover = () => {
         setSucesso(false);
         console.error("Erro ao remover cadastro!", error);
       });
-    } else {
+    } else if(tipo === 'projeto') {
       firebaseDB.firestore().collection('projetos').doc(id).delete().then(function() {
+        setSucesso(true);
+      }).catch(function(error) {
+        setSucesso(false);
+        console.error("Erro ao remover cadastro!", error);
+      });
+    } else if(tipo === 'membro') {
+      firebaseDB.firestore().collection('membros').doc(id).delete().then(function() {
         setSucesso(true);
       }).catch(function(error) {
         setSucesso(false);
@@ -29,7 +36,7 @@ const ResultadoRemover = () => {
   if(sucesso === true) {
     return <Mensagem titulo="Removido com sucesso!" texto="Entrada removida com seucesso do banco de dados." />;
   } else if (sucesso === false) {
-    return <Mensagem titulo="Erro ao remover!" texto="HOuve um erro ao tentar remover a entrada do banco de dados." />;
+    return <Mensagem titulo="Erro ao remover!" texto="Houve um erro ao tentar remover a entrada do banco de dados." />;
   } else {
     return <Carregando />;
   }

@@ -64,7 +64,7 @@ const Cadastrar = () => {
             <div className="row">
                 <div className="centralizar col-8">
                     <FormularioProfessor titulo="Cadastrar professor" valoresIniciais={valoresIniciais} textoBotao="Cadastrar" onSubmit={onSubmit} />
-                    <BotaoVoltar />
+                    <BotaoVoltar setVoltarRoute="/listar/professores" />
                 </div>
             </div>
           )

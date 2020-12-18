@@ -13,7 +13,7 @@ const FormularioAluno = ({component: Component, ...rest}) => {
       nome: Yup.string().required(),
       idade: Yup.number().transform(value => isNaN(value) ? 0 : value).required().integer().min(17, 'Você deve ter mais que 16 anos'),
       cpf: Yup.string().required().matches(/^\d{3}\.\d{3}\.\d{3}\-\d{2}$/, 'O CPF deve estar no formato 000.000.000-00'),
-      matricula: Yup.string().required().min(9),
+      matricula: Yup.string().required().matches(/^\d{9}$/, 'A matrícula deve conter 9 dígitos'),
       curso: Yup.string().required(),
       endereco: Yup.string().required(),
       bairro: Yup.string().required(),

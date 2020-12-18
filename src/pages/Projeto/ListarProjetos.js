@@ -48,6 +48,7 @@ const ListarProjetos = () => {
                   <td className="acoes nowrap">
                     <Link to={"/ver/projeto/" + key} title="Ver"><i className="fa fa-eye"></i></Link>
                     <Link to={"/editar/projeto/" + key} title="Editar"><i className="fa fa-pencil"></i></Link>
+                    <Link to={"/vincular/projeto/" + key} title="Vincular membro"><i className="fa fa-link"></i></Link>
                     <Link to={"/remover/projeto/" + key} title="Remover"><i className="fa fa-trash"></i></Link>
                   </td>
                 </tr>

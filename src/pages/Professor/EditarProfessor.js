@@ -86,7 +86,7 @@ const Editar = () => {
                 <div className="row">
                     <div className="centralizar col-8">
                         <FormularioProfessor titulo="Editar professor" valoresIniciais={valoresIniciais} textoBotao="Editar" onSubmit={onSubmit} />
-                        <BotaoVoltar />
+                        <BotaoVoltar setVoltarRoute="/listar/professores" />
                     </div>
                 </div>
             )

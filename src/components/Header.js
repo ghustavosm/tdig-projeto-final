@@ -37,7 +37,9 @@ const Header = () => (
             </a>
             <ul className="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
               <Link className="dropdown-item" to="/listar/projetos">Listar projetos</Link>
+              <Link className="dropdown-item" to="/listar/membros">Listar membros</Link>
               <Link className="dropdown-item" to="/cadastrar/projeto">Cadastrar projeto</Link>
+              <Link className="dropdown-item" to="/vincular">Vincular membro</Link>
             </ul>
           </li>
           <li className="nav-item">

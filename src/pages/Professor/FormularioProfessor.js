@@ -11,7 +11,7 @@ const FormularioProfessor = ({component: Component, ...rest}) => {
       usuario: Yup.string().required(),
       senha: Yup.string().required(),
       nome: Yup.string().required(),
-      matricula: Yup.string().required().min(9),
+      matricula: Yup.string().required().matches(/^\d{9}$/, 'A matrícula deve conter 9 dígitos'),
       atuacao: Yup.string().required(),
       formacao: Yup.string().required(),
     });

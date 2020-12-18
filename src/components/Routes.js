@@ -4,6 +4,7 @@ import Footer from './Footer';
 import { Login, Logout, Home, Ver, Listar, Cadastrar, Editar, Remover, Sobre, NaoEncontrada } from '../pages';
 import { isAuthenticated } from './Auth';
 import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom';
+import VincularMembro from '../pages/Projeto/VincularMembro';
 
 const PrivateRoute = ({component: Component, ...rest}) => (
     <Route
@@ -48,6 +49,8 @@ const Routes = () => {
                                 <PrivateRoute path="/editar/:tipo/:id" component={() => <Editar />} />
                                 <PrivateRoute path="/remover/:tipo/:id" component={() => <Remover />} />                              
                                 <PrivateRoute path="/cadastrar/:tipo" component={() => <Cadastrar />} />
+                                <PrivateRoute path="/vincular/:tipo/:id" component={() => <VincularMembro />} />
+                                <PrivateRoute path="/vincular" component={() => <VincularMembro />} />
                                 <PrivateRoute path="/sobre" component={() => <Sobre />} />                                
                                 <Route path="/login" component={() => <Login />} />
                                 <Route path="/logout" component={() => <Logout />} />
