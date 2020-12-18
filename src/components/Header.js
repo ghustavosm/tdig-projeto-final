@@ -9,7 +9,7 @@ const Header = () => (
         <span className="navbar-toggler-icon"></span>
       </button>
       <div className="collapse navbar-collapse" id="navbarNavDropdown">
-        <ul className="navbar-nav">
+        <ul className="navbar-nav me-auto">
           <li className="nav-item">
             <Link className="nav-link active" aria-current="page" to="/">Início</Link>
           </li>
@@ -46,6 +46,7 @@ const Header = () => (
             <Link className="nav-link active" to="/sobre">Sobre</Link>
           </li>
         </ul>
+        <span class="navbar-text"><Link className="nav-link active" to="/logout">Sair</Link></span>
       </div>
     </div>
   </nav>
